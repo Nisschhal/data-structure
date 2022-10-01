@@ -57,4 +57,25 @@ class HashTable {
     }
     return undefined;
   }
+
+  getKeys() {
+    /*
+    - create keys empty list/array
+    - loop through all the item
+    - if item is present then loop through the inner loop 
+        -- grab the key and push it into keys list
+    - return keys
+
+     */
+    let keys = [];
+    for (let i = 0; i < this.dataSet.length; i++) {
+      if (this.dataSet[i]) {
+        for (let j = 0; j < this.dataSet[i].length; j++) {
+          // get the key
+          keys.push(this.dataSet[i][j][0]);
+        }
+      }
+    }
+    return keys;
+  }
 }
