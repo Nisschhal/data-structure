@@ -90,6 +90,69 @@ class Sorting {
       array[j + 1] = temp;
     }
   }
+
+  /*
+
+  merget(leftArray, rightArray): // MERGE THE LEFT AND RIGHT ARRAY BY COMPARING
+  - create an empty array to combine result
+  - create indexes for left and right array
+  - loop only with conditions of while i < leftArray.length and j < rightArray.length
+    // compare and insert small one to combinedArray/result array
+    -- if (leftArrray[i] < rightArray[j]:
+      - insert leftArray[i] to combined and increment i
+    -- else insert rightArray[j] to combined and increment j
+
+  // last check if item left in the left or right array
+  - loop with condition if item left in left array: while i < leftArray.length
+      --insert it into combined array and increment i
+  - loop with conditin if item left in the right array: while j < rightArray.length
+      --insert it into combined array and increment 1
+  - return combinedArray/resultArray
+
+  */
+
+  merge(leftArray, rightArray) {
+    let combined = [];
+    let i = 0;
+    let j = 0;
+    while (i < leftArray.length && j < rightArray.length) {
+      if (leftArray[i] < rightArray[j]) {
+        combined.push(leftArray[i]);
+        i++;
+      } else {
+        combined.push(rightArray[j]);
+        j++;
+      }
+    }
+    while (i < leftArray.length) {
+      combined.push(leftArray[i]);
+      i++;
+    }
+    while (j < rightArray.length) {
+      combined.push(rightArray[j]);
+      j++;
+    }
+    return combined;
+  }
+
+  /* 
+  mergeSort(array): // SORT THE GIVEN ARRAY BY SPLITING INTO SINGLE ITEM AND MERGING THEM ONE BY ONE using recursion
+  let mid = Math.floor(array.length/2);
+  let leftArray = array.slice(0, mid)
+  let rightArray = array.slice(mid)
+
+  return merge(mergeSort(leftArray), mergeSort(rightArray));
+
+  */
+
+  mergeSort(array) {
+    if (array.length === 1) return array;
+    let mid = Math.floor(array.length / 2);
+    let leftArray = array.n(0, mid);
+    let rightArray = array.slice(mid);
+
+    return this.merge(this.mergeSort(leftArray), this.mergeSort(rightArray));
+  }
 }
 
 const mySort = new Sorting();
@@ -102,5 +165,6 @@ const arry = [21, 11, 99, 1, 4, 0];
 
 // console.log(arry);
 
-mySort.insertionSort(arry);
-console.log(arry);
+// mySort.insertionSort(arry);
+console.log(mySort.mergeSort(arry));
+// console.log(arry);

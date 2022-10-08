@@ -73,4 +73,62 @@ class BST {
     }
     return false;
   }
+  /*
+  breadth-first-search(root): // traverse each level from top to bottom
+  // use the queue to add each item into result of a level one by one until queue is empty
+   - create queue container/list
+   - create result container/list
+   - add rootnode to queue
+   - loop until queue is empty: while (queue.length):
+      - pop queue item into temp 
+      - add popped/temp item to result list
+      - if temp has left then push it to queue
+      - if temp has right then push it to queue
+   - return result
+*/
+
+  bfsTraversal(root) {
+    let queue = [];
+    let result = [];
+    queue.push(root);
+    while (queue.length) {
+      let temp = queue.pop();
+      result.push(temp.value);
+      if (temp.left) queue.push(temp.left);
+      if (temp.right) queue.push(temp.right);
+    }
+    return result;
+  }
+
+  /* 
+
+  depth-first-search Traversal(root): // traverse based on the pre/post/in and callStack/recursion
+    preOrderTraversal(root):  // before left and right traverse add the value
+      - let result = [];
+      - traverse(currentNode):
+        - result.push(currentNode.value);
+        - if (currentNode.left) traverse(currentNode.left)
+        - if (currentNode.right) traverse(currentNode.right)
+      - traverse(root)
+      - return result
+
+    postOrderTraversal(root): // after left and right traverse add the value
+      - let result = [];
+      - traverse(currentNode):
+        - if (currentNode.left) traverse(currentNode.left)
+        - if (currentNode.right) traverse(currentNode.right)
+        - result.push(currentNode.value)
+      - traverse(root)
+      - return result
+
+    inOrderTraversal(root):  // add after the left traverse
+      - let result = [];
+      - traverse(currentNode):
+        - if (currentNode.left) traverse(currentNode.left)
+        - result.push(currentNode.value)
+        - if (currentNode.right) traverse(currentNode.right)
+      - traverse(root)
+      - return result
+
+  */
 }
