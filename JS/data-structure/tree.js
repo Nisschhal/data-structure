@@ -25,24 +25,26 @@ class BST {
     */
 
   insert(value) {
-    let temp = this.root;
-    const node = TreeNode(value);
-    if (!this.root) {
+    const node = new TreeNode(value);
+    if (this.root === null) {
       this.root = node;
-
       return this;
     }
+    let temp = this.root;
     while (temp != null) {
+      if (value === temp.value) return undefined;
       if (value < temp.value) {
-        if (temp.left == null) {
+        if (temp.left === null) {
           temp.left = node;
           return this;
         }
+        temp = temp.left;
       } else if (value > temp.value) {
-        if (temp.right == null) {
+        if (temp.right === null) {
           temp.right = node;
           return this;
         }
+        temp = temp.right;
       }
     }
   }
@@ -92,7 +94,7 @@ class BST {
     let result = [];
     queue.push(root);
     while (queue.length) {
-      let temp = queue.pop();
+      let temp = queue.shift();
       result.push(temp.value);
       if (temp.left) queue.push(temp.left);
       if (temp.right) queue.push(temp.right);
@@ -131,4 +133,58 @@ class BST {
       - return result
 
   */
+
+  dfsPreOrderTraversal(root) {
+    if (!root) return undefined;
+    let result = [];
+    function traverse(currentNode) {
+      result.push(currentNode.value);
+      if (currentNode.left) traverse(currentNode.left);
+      if (currentNode.right) traverse(currentNode.right);
+    }
+    traverse(root);
+    return result;
+  }
+
+  dfsPostOrderTraversal(root) {
+    if (!root) return undefined;
+    let result = [];
+    function traverse(currentNode) {
+      if (currentNode.left) traverse(currentNode.left);
+      if (currentNode.right) traverse(currentNode.right);
+      result.push(currentNode.value);
+    }
+    traverse(root);
+    return result;
+  }
+  dfsInOrderTraversal(root) {
+    if (!root) return undefined;
+    let result = [];
+    function traverse(currentNode) {
+      if (currentNode.left) traverse(currentNode.left);
+      result.push(currentNode.value);
+      if (currentNode.right) traverse(currentNode.right);
+    }
+    traverse(root);
+    return result;
+  }
 }
+
+const mytree = new BST();
+mytree.insert(47);
+mytree.insert(21);
+mytree.insert(76);
+mytree.insert(18);
+mytree.insert(27);
+mytree.insert(52);
+mytree.insert(82);
+console.log("ok");
+const bfs = mytree.bfsTraversal(mytree.root);
+console.log(bfs);
+const predfs = mytree.dfsPreOrderTraversal(mytree.root);
+console.log(predfs);
+const pstdfs = mytree.dfsPostOrderTraversal(mytree.root);
+console.log(pstdfs);
+const indfs = mytree.dfsInOrderTraversal(mytree.root);
+console.log(indfs);
+// console.log(mytree.dfsPreOrderTraversal(mytree.root));
